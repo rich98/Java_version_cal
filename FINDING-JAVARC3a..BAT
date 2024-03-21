@@ -132,6 +132,11 @@ if "%%p"=="Version" (
     )
     echo Java Version: !java_version! >> %results_file%
     echo Java Version: !java_version!
+	
+	    rem Clear major, minor, and patch after each pass
+    set "major="
+    set "minor="
+    set "patch="
 )
 
     )
