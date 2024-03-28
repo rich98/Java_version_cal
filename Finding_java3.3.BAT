@@ -55,7 +55,7 @@ echo Set Data classification Valid entries:O, OS, S, SUKEO, OCCAR-R, C1, C2, C3,
 set /p govclass="Please set the classification of Data? "
 echo ******************************************************************************************************
 
-	set scriptver=3.2beta-final release
+	set scriptver=3.3 (final release)
 	if /i "%govclass%"=="o" (
 		set clss="OFFICIAL"
 	) else if /i "%govclass%"=="os" (
@@ -213,6 +213,21 @@ if "%%p"=="Version" (
 exit /b
 
 :begindebug
+
+:admincheck
+REM Check if the user is running as admin (administrator)
+>nul 2>&1 net session
+if %errorlevel% == 0 (
+	set admin=Yes
+    echo User is running as administrator.
+    goto debug
+) else (
+	set admin=No
+    echo WARNING: NOT running as administrator. the script will now exit
+pause
+)
+exit/b
+:debug
 color 1F
 setlocal enabledelayedexpansion
 set "BMN=DEBUG"
@@ -252,7 +267,7 @@ echo Search complete. Results saved to %debug_file%
 
 set /p rerun="Do you want to rerun the script? (yes/no): "
 if /i "%rerun%"=="yes" goto begindebug
- 
+ exit /b
 :searchdebug
 for /r %1 %%f in (%2) do (
     echo Found: %%f >> %debug_file%
@@ -267,6 +282,8 @@ for /r %1 %%f in (%2) do (
         rem Add your additional checks or actions here if needed
     )
 )
+
+
 
 
 
