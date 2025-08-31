@@ -1,6 +1,7 @@
 # Finding_java_no_wmic.ps1
 # PowerShell-native rewrite of the Java finder (no WMIC)
 # Tested on Windows 11 (including 24H2) with Windows PowerShell 5.1 and PowerShell 7+
+# v1 RTichard wadsworth
 
 $ErrorActionPreference = 'SilentlyContinue'
 $scriptver = '3.3-ps-no-wmic'
@@ -181,3 +182,4 @@ do {
     Write-Host ("Search complete. Results saved to {0}" -f $resultsPath) -ForegroundColor Green
     $again = Read-Host 'Do you want to rerun the script? (yes/no)'
 } while ($again -match '^(y|yes)$')
+
